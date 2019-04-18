@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <h1></h1>
+    <form>
+      <input type="text" id="city" />
+      <input type="submit" value="Search" />
+    </form>
+
+    <script>
+      function search(event) {
+        event.preventDefault();
+        let city = document.querySelector("#city").value;
+        let apiRoot = "https://api.openweathermap.org/data/2.5";
+
+        let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+        axios
+          .get(`${apiRoot}/weather?q=${city}&units=metric&appid=${apiKey}`)
+          .then(function(response) {
+            let h1 = document.querySelector("h1");
+            h1.innerHTML = Math.round(response.data.main.temp);
+          });
+      }
+
+      let form = document.querySelector("form");
+      form.addEventListener("submit", search);
+    </script>
+  </body>
+</html>
